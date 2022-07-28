@@ -1,4 +1,4 @@
-from examples import percentile, spatial, update
+from examples import percentile, collision, update
 
 """
 Just checks that the examples run without throwing exceptions. 
@@ -13,6 +13,6 @@ def test_update():
     update.main()
 
 
-def test_spatial():
-    spatial.main()
+def test_collision():
+    collision.main()
 
