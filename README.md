@@ -100,7 +100,7 @@ f.find({o_count: 2})  # returns ['mushrooms', 'onions']
  
  - [Auto-updating](examples/update.py) - Keep Filtered updated when attribute values change
  - [Wordle solver](examples/wordle.ipynb) - Use `functools.partials` to make many attribute functions
- - [Collision detection](examples/collision.py) - Find nearby objects for collision detection
+ - [Collision detection](examples/collision.py) - Find objects based on type and proximity (grid-based)
  - [Percentiles](examples/percentile.py) - Find by percentile (median, p99, etc.)
 
 ____
