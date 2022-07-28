@@ -1,6 +1,8 @@
 # Filtered
 
-Find Python objects that match a set of attributes, usually in <1ms.
+Python container that pre-filters objects by attribute value. 
+
+Provides fast (typically <1ms) lookup by any combination of attributes.
 
 `pip install filtered`
 
@@ -46,20 +48,23 @@ f.find(match={'size': 'regular', 'topping': 'smothered'})  # returns order 1
 
 f.find(
     match={'size': ['regular', 'large']},  # match 'regular' or 'large' sizes
-    exclude={'topping': 'covered'}         # exclude where topping is 'covered'
-)  # returns orders 1 and 2
+    exclude={'topping': 'diced'}         # exclude where topping is 'covered'
+)  # returns orders 1 and 3
 ```
 
 ### Object with nested attributes
 
 ```
-from filtered import FrozenFiltered
+from filtered import Filtered
 
 class Order:
     def __init__(self, num, size, toppings):
         self.num = num
         self.size = size
         self.toppings = toppings
+    
+    def __repr__(self):
+        return f"{self.num}, {self.size}, {self.toppings}"
     
 objects = [
     Order(1, 'regular', ['scattered', 'smothered', 'covered']),
@@ -73,8 +78,7 @@ def has_cheese(obj):
 
 f = FrozenFiltered(objects, ['size', has_cheese])
 
-# returns orders 1, 2 and 4
-f.find({has_cheese: True})  
+f.find({has_cheese: True})  # returns orders 1, 2 and 4
 ```
 
 ### Strings
@@ -92,11 +96,12 @@ f.find({len: 6})       # returns ['onions']
 f.find({o_count: 2})  # returns ['mushrooms', 'onions']
 ```
 
-### Advanced usage
+### Recipes
  
- - [Auto-updating](examples/update.py) - Define setters on your objects to keep Filtered updated when they change
+ - [Auto-updating](examples/update.py) - Keep Filtered updated when attribute values change
  - [Wordle solver](examples/wordle.ipynb) - Use partials to generate many attribute functions
- - [Spatial lookup](examples/spatial.py) - Do location finding and collision detection
+ - [Spatial lookup](examples/spatial.py) - Location finding and collision detection
+ - [Percentiles](examples/percentile.py) - Find by percentile (median, p99, etc.)
 
 ____
 

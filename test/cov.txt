@@ -2,12 +2,12 @@
 platform linux -- Python 3.9.7, pytest-6.2.4, py-1.10.0, pluggy-0.13.1
 rootdir: /home/theo/repos
 plugins: anyio-2.2.0, cov-3.0.0
-collected 105 items
+collected 104 items
 
-test/test_basic_operations.py ......................                     [ 20%]
+test/test_basic_operations.py ......................                     [ 21%]
 test/test_container_ops.py ..............                                [ 34%]
 test/test_edge_cases.py .......................                          [ 56%]
-test/test_examples.py ....                                               [ 60%]
+test/test_examples.py ...                                                [ 59%]
 test/test_exceptions.py ........                                         [ 67%]
 test/test_fancy_gets.py ........                                         [ 75%]
 test/test_hash_collisions.py ........                                    [ 82%]
@@ -24,7 +24,7 @@ filtered/exceptions.py                 4      0   100%
 filtered/frozen/__init__.py            0      0   100%
 filtered/frozen/frozen_attr.py        63      0   100%
 filtered/frozen/main.py               61      0   100%
-filtered/frozen/utils.py              10      0   100%
+filtered/frozen/utils.py              12      0   100%
 filtered/init_helpers.py              69      0   100%
 filtered/mutable/__init__.py           0      0   100%
 filtered/mutable/main.py              71      0   100%
@@ -32,7 +32,7 @@ filtered/mutable/mutable_attr.py      43      0   100%
 filtered/perf.py                       0      0   100%
 filtered/utils.py                     25      0   100%
 ------------------------------------------------------
-TOTAL                                355      0   100%
+TOTAL                                357      0   100%
 
 
-============================= 105 passed in 5.40s ==============================
+============================= 104 passed in 5.33s ==============================

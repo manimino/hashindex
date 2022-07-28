@@ -13,3 +13,7 @@ def snp_difference(left: np.ndarray, right: np.ndarray):
 
 def make_empty_int_array():
     return np.empty(0, dtype="int64")
+
+
+def make_empty_obj_array():
+    return np.empty(0, dtype="int64")

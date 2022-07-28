@@ -7,7 +7,7 @@ from typing import Optional, Any, Dict, Union, Callable, Iterable, List
 import sortednp as snp
 
 from filtered.frozen.frozen_attr import FrozenFieldIndex
-from filtered.frozen.utils import make_empty_int_array, snp_difference
+from filtered.frozen.utils import make_empty_obj_array, snp_difference
 from filtered.utils import validate_query
 
 
@@ -87,11 +87,11 @@ class FrozenFiltered:
         Example:
             find(
                 match={'a': 1, 'b': [1, 2, 3]},
-                exclude={'c': 1, 'd': 1}
+                exclude={'c': 1, 'd': [1, 2}
             )
             This is analogous to:
             filter(
-                lambda obj: obj.a == 1 and obj.b in [1, 2, 3] and obj.c != 1 and obj.d != 1,
+                lambda obj: obj.a == 1 and obj.b in [1, 2, 3] and obj.c != 1 and obj.d not in [1, 2],
                 objects
             )
         """
@@ -112,7 +112,7 @@ class FrozenFiltered:
                     hits = snp.intersect(hits, field_hits)
                 else:
                     # this field had no matches, therefore the intersection will be empty. We can stop here.
-                    return np.empty(0, dtype="O")
+                    return make_empty_obj_array()
         else:
             # 'match' is unspecified, so match all objects
             hits = self.id_arr
@@ -150,7 +150,15 @@ class FrozenFiltered:
         else:
             return self.indices[field].get(value)
 
-    def _get_objs_by_ids(self, id_arr: np.ndarray):
+    def _get_objs_by_ids(self, id_arr: np.ndarray) -> np.ndarray:
+        """Look up the object IDs, find the corresponding objects.
+
+        Args:
+            id_arr: numpy array of integer object IDs
+
+        Returns:
+            numpy array of Python objects
+        """
         _, indices = snp.intersect(id_arr, self.id_arr, indices=True)
         return self.obj_arr[indices[1]]
 
